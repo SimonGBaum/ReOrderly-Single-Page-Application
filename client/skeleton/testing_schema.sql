@@ -1,67 +1,118 @@
-CREATE TABLE "Customers"(
-    "id" UUID NOT NULL,
+CREATE TABLE "users"(
+    "id" UUID NOT NULL DEFAULT 'Default: gen_random_uuid()',
+    "user_name" VARCHAR(255) NOT NULL,
+    "email" VARCHAR(255) NOT NULL,
+    "password" VARCHAR(255) NOT NULL,
     "first_name" VARCHAR(255) NOT NULL,
     "last_name" VARCHAR(255) NOT NULL,
-    "email" VARCHAR(255) NOT NULL,
-    "user_name" VARCHAR(255) NOT NULL,
-    "password" VARCHAR(255) NOT NULL,
-    "mailing_address" VARCHAR(255) NOT NULL,
-    "billing_address" VARCHAR(255) NOT NULL
+    "mailing_address" TEXT NOT NULL,
+    "billing_address" TEXT NOT NULL,
+    "role" VARCHAR(255) NOT NULL DEFAULT 'Default: ''member''. Can be set to ''admin''',
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL DEFAULT 'Default: NOW()'
 );
 ALTER TABLE
-    "Customers" ADD PRIMARY KEY("id");
-CREATE TABLE "Orders"(
+    "users" ADD PRIMARY KEY("id");
+ALTER TABLE
+    "users" ADD CONSTRAINT "users_user_name_unique" UNIQUE("user_name");
+ALTER TABLE
+    "users" ADD CONSTRAINT "users_email_unique" UNIQUE("email");
+COMMENT
+ON COLUMN
+    "users"."user_name" IS 'Unique identifier for mentions/login';
+COMMENT
+ON COLUMN
+    "users"."email" IS 'Crucial for auth, must be lowercase/unique';
+COMMENT
+ON COLUMN
+    "users"."password" IS 'Never store plain text passwords!';
+COMMENT
+ON COLUMN
+    "users"."mailing_address" IS 'Better than VARCHAR for multi-line addresses';
+CREATE TABLE "orders"(
     "id" VARCHAR(255) NOT NULL,
-    "order_types" VARCHAR(255) NOT NULL,
-    "products" VARCHAR(255) NOT NULL,
+    "user_id" UUID NOT NULL,
+    "status" VARCHAR(255) NOT NULL,
+    "order_type" VARCHAR(255) NOT NULL,
+    "order_name" VARCHAR(255) NOT NULL,
     "store_name" VARCHAR(255) NOT NULL,
-    "quantity" BIGINT NOT NULL,
-    "customers_id" UUID NOT NULL
+    "store_address" TEXT NOT NULL,
+    "created_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL DEFAULT 'Default: NOW()',
+    "updated_at" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL DEFAULT 'Default: NOW()'
 );
 ALTER TABLE
-    "Orders" ADD PRIMARY KEY("id");
-CREATE INDEX "orders_customers_id_index" ON
-    "Orders"("customers_id");
-CREATE TABLE "Products"(
-    "id" VARCHAR(255) NOT NULL,
-    "product_type" VARCHAR(255) NOT NULL,
+    "orders" ADD PRIMARY KEY("id");
+CREATE INDEX "orders_user_id_index" ON
+    "orders"("user_id");
+COMMENT
+ON COLUMN
+    "orders"."id" IS 'The "Order Number" shown to users';
+COMMENT
+ON COLUMN
+    "orders"."user_id" IS 'References users(id) ON DELETE CASCADE';
+COMMENT
+ON COLUMN
+    "orders"."status" IS 'Enforces: ''draft'', ''active'', or ''cancelled''';
+COMMENT
+ON COLUMN
+    "orders"."order_type" IS 'e.g., ''Subscription'', ''One-time''';
+CREATE TABLE "order_items"(
+    "id" UUID NOT NULL,
+    "order_id" UUID NOT NULL,
     "product_name" VARCHAR(255) NOT NULL,
-    "product_quantity" BIGINT NOT NULL,
-    "production_description" TEXT NOT NULL,
-    "products" VARCHAR(255) NOT NULL,
-    "orders_id" VARCHAR(255) NOT NULL
+    "product_type" VARCHAR(255) NOT NULL,
+    "quantity" INTEGER NOT NULL DEFAULT 'Default: 1',
+    "description" TEXT NOT NULL
 );
 ALTER TABLE
-    "Products" ADD PRIMARY KEY("id");
-CREATE INDEX "products_orders_id_index" ON
-    "Products"("orders_id");
-CREATE TABLE "Order Types"(
-    "id" VARCHAR(255) NOT NULL,
-    "repeat" BOOLEAN NOT NULL,
-    "single" BOOLEAN NOT NULL,
-    "numbered" BOOLEAN NOT NULL,
-    "occurence_count" BIGINT NOT NULL,
-    "orders_id" VARCHAR(255) NOT NULL
+    "order_items" ADD PRIMARY KEY("id");
+CREATE INDEX "order_items_order_id_index" ON
+    "order_items"("order_id");
+COMMENT
+ON COLUMN
+    "order_items"."id" IS 'Unique item identifier';
+COMMENT
+ON COLUMN
+    "order_items"."order_id" IS 'References orders(id) ON DELETE CASCADE';
+COMMENT
+ON COLUMN
+    "order_items"."product_type" IS 'e.g., ''Medication'', ''Food'', ''Hygiene''';
+COMMENT
+ON COLUMN
+    "order_items"."description" IS 'Optional detailed notes for the user';
+CREATE TABLE "delivery_schedules"(
+    "id" UUID NOT NULL DEFAULT 'Unique schedule ID',
+    "order_id" UUID NOT NULL,
+    "frequency" VARCHAR(255) NOT NULL,
+    "max_deliveries" INTEGER NOT NULL,
+    "delivery_count" INTEGER NOT NULL,
+    "last_delivery_date" DATE NOT NULL,
+    "expected_delivery_date" DATE NOT NULL
 );
 ALTER TABLE
-    "Order Types" ADD PRIMARY KEY("id");
-CREATE INDEX "order types_orders_id_index" ON
-    "Order Types"("orders_id");
-CREATE TABLE "Product Origins"(
-    "id" VARCHAR(255) NOT NULL,
-    "company_name" VARCHAR(255) NOT NULL,
-    "store_location" VARCHAR(255) NOT NULL,
-    "order_id" VARCHAR(255) NOT NULL
-);
+    "delivery_schedules" ADD PRIMARY KEY("id");
+CREATE INDEX "delivery_schedules_order_id_index" ON
+    "delivery_schedules"("order_id");
+COMMENT
+ON COLUMN
+    "delivery_schedules"."order_id" IS 'References orders(id) ON DELETE CASCADE';
+COMMENT
+ON COLUMN
+    "delivery_schedules"."frequency" IS 'e.g., ''Weekly'', ''Monthly'', ''Every 3 Months''';
+COMMENT
+ON COLUMN
+    "delivery_schedules"."max_deliveries" IS 'Total planned iterations (Number of deliveries)';
+COMMENT
+ON COLUMN
+    "delivery_schedules"."delivery_count" IS 'Counter for "Lifetime number of deliveries"';
+COMMENT
+ON COLUMN
+    "delivery_schedules"."last_delivery_date" IS 'Nullable until the first delivery happens';
+COMMENT
+ON COLUMN
+    "delivery_schedules"."expected_delivery_date" IS 'The calculated next drop date';
 ALTER TABLE
-    "Product Origins" ADD PRIMARY KEY("id");
-CREATE INDEX "product origins_order_id_index" ON
-    "Product Origins"("order_id");
+    "order_items" ADD CONSTRAINT "order_items_order_id_foreign" FOREIGN KEY("order_id") REFERENCES "orders"("id");
 ALTER TABLE
-    "Products" ADD CONSTRAINT "products_orders_id_foreign" FOREIGN KEY("orders_id") REFERENCES "Orders"("id");
+    "orders" ADD CONSTRAINT "orders_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
 ALTER TABLE
-    "Product Origins" ADD CONSTRAINT "product origins_order_id_foreign" FOREIGN KEY("order_id") REFERENCES "Orders"("id");
-ALTER TABLE
-    "Orders" ADD CONSTRAINT "orders_customers_id_foreign" FOREIGN KEY("customers_id") REFERENCES "Customers"("id");
-ALTER TABLE
-    "Order Types" ADD CONSTRAINT "order types_orders_id_foreign" FOREIGN KEY("orders_id") REFERENCES "Orders"("id");
+    "delivery_schedules" ADD CONSTRAINT "delivery_schedules_order_id_foreign" FOREIGN KEY("order_id") REFERENCES "orders"("id");
