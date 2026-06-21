@@ -1,0 +1,55 @@
+.page-wrapper {
+  min-height: 100dvh;
+  background: var(--lion-base);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Five lion page themes ── */
+.page-home {
+  --lion-color:  #1C1C2E;
+  --lion-accent: #C9A84C;
+  --lion-base:   #12121F;
+}
+
+.page-create {
+  --lion-color:  #8B1A1A;
+  --lion-accent: #FF4040;
+  --lion-base:   #1A0808;
+}
+
+.page-orders {
+  --lion-color:  #0D2B5E;
+  --lion-accent: #4A9EE8;
+  --lion-base:   #080F1F;
+}
+
+.page-update {
+  --lion-color:  #0F3320;
+  --lion-accent: #3DCA5A;
+  --lion-base:   #061A0E;
+}
+
+.page-track {
+  --lion-color:  #3D2E00;
+  --lion-accent: #F0C030;
+  --lion-base:   #1A1400;
+}
+
+/* ── Voltron logo palette pages (login, signup, profile, contact) ── */
+.page-voltron {
+  --lion-color:  #16162A;
+  --lion-accent: #C9A84C;
+  --lion-base:   #0D0D1A;
+  background: #0D0D1A;
+}
+
+/* ── Galra error page ── */
+.page-error {
+  --lion-color:  #150020;
+  --lion-accent: #7B2FBE;
+  --lion-base:   #0A0010;
+  background: #0A0010;
+  color: #D0C8E0;
+}

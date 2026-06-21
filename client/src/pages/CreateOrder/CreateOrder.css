@@ -1,0 +1,176 @@
+.create-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-lg);
+}
+
+.create-header h1 {
+  color: #FF4040;
+}
+
+.autosave-dot {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  transition: color 0.3s;
+  line-height: 1;
+}
+
+.autosave-dot--saved {
+  color: #C9A84C;
+  animation: savedPulse 1s ease 0s 2;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  border-color: color-mix(in srgb, #FF4040 25%, transparent);
+}
+
+.create-form:hover {
+  border-color: color-mix(in srgb, #FF4040 40%, transparent);
+  box-shadow: none;
+}
+
+.create-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-md);
+}
+
+@media (max-width: 640px) {
+  .create-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--text-small);
+}
+
+.label-only {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Order type toggle ── */
+.create-type-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.type-toggle-buttons {
+  display: flex;
+  gap: var(--gap-sm);
+}
+
+.type-btn {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.type-btn:hover {
+  border-color: #FF4040;
+  color: #FF4040;
+}
+
+.type-btn--active {
+  background: rgba(255,64,64,0.15);
+  border-color: #FF4040;
+  color: #FF4040;
+}
+
+.type-btn:focus-visible {
+  outline: 2px solid #FF4040;
+  outline-offset: 2px;
+}
+
+/* ── Recurring options inset ── */
+.create-recurring {
+  background: rgba(139,26,26,0.15);
+  border: 1px solid rgba(255,64,64,0.2);
+  border-radius: var(--radius-md);
+  padding: var(--gap-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.create-recurring:hover {
+  box-shadow: none;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.form-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #FF4040;
+  cursor: pointer;
+}
+
+.form-check label {
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* ── Submit actions ── */
+.create-actions {
+  display: flex;
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+  padding-top: var(--gap-sm);
+  border-top: 1px solid var(--border);
+}
+
+/* ── Done state ── */
+.create-done {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100dvh - 10rem);
+}
+
+.create-done__card {
+  text-align: center;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.create-done__card h2 {
+  color: #FF4040;
+}
+
+.create-done__actions {
+  display: flex;
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}

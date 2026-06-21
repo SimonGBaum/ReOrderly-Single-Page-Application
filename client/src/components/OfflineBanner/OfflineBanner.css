@@ -1,0 +1,14 @@
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-banner);
+  background: #2A1A00;
+  border-bottom: 1px solid #F0C030;
+  color: #F0C030;
+  font-size: var(--text-small);
+  font-weight: 600;
+  text-align: center;
+  padding: 0.6rem var(--page-padding);
+}

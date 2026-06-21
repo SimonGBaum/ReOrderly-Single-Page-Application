@@ -1,0 +1,126 @@
+.contact-title {
+  font-family: var(--font-display);
+  color: #E8E8F0;
+  margin-bottom: var(--gap-sm);
+}
+
+.contact-intro {
+  color: #8888AA;
+  margin-bottom: var(--gap-xl);
+}
+
+.contact-details {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--gap-md);
+  margin-bottom: var(--gap-lg);
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+  background: #16162A;
+  border-color: #2A2A4A;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.contact-detail:hover {
+  border-color: #C9A84C;
+  box-shadow: 0 0 12px rgba(201,168,76,0.15);
+}
+
+.contact-detail__label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #8888AA;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+
+.contact-detail__value {
+  display: block;
+  font-size: var(--text-small);
+  color: #C9A84C;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.contact-detail__value:hover {
+  text-decoration: underline;
+}
+
+/* ── Form ── */
+.contact-form {
+  background: #16162A;
+  border-color: #2A2A4A;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  max-width: 640px;
+}
+
+.contact-form:hover {
+  border-color: #C9A84C;
+  box-shadow: 0 0 16px rgba(201,168,76,0.1);
+}
+
+.contact-form__heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: #C9A84C;
+}
+
+.contact-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-md);
+}
+
+@media (max-width: 480px) {
+  .contact-form__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea {
+  background: #0D0D1A;
+  border-color: #2A2A4A;
+}
+
+.contact-form .form-group input:focus,
+.contact-form .form-group textarea:focus {
+  border-color: #C9A84C;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+}
+
+.contact-form .btn-primary {
+  background: #C9A84C;
+  color: #0D0D1A;
+  align-self: flex-start;
+}
+
+.contact-form .btn-primary:hover {
+  box-shadow: 0 0 20px rgba(201,168,76,0.5);
+}
+
+.contact-success {
+  background: rgba(61,202,90,0.08);
+  border-color: rgba(61,202,90,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+  max-width: 640px;
+  color: #3DCA5A;
+  font-weight: 600;
+}
+
+.contact-success:hover {
+  box-shadow: none;
+}

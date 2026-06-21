@@ -1,0 +1,111 @@
+.auth-page {
+  min-height: calc(100dvh - 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gap-lg) var(--page-padding);
+}
+
+.auth-card {
+  background: #16162A;
+  border: 1px solid #2A2A4A;
+  border-radius: var(--radius-md);
+  padding: var(--gap-xl) var(--gap-lg);
+  width: 100%;
+  max-width: 520px;
+}
+
+.auth-stripe {
+  margin: 0 0 var(--gap-lg);
+}
+
+.auth-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 900;
+  color: #E8E8F0;
+  margin-bottom: var(--gap-sm);
+}
+
+.auth-subtext {
+  color: #8888AA;
+  font-size: var(--text-small);
+  margin-bottom: var(--gap-lg);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+.auth-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-md);
+}
+
+@media (max-width: 480px) {
+  .auth-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.auth-card .form-group input {
+  background: #0D0D1A;
+  border-color: #2A2A4A;
+}
+
+.auth-card .form-group input:focus {
+  border-color: #C9A84C;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
+}
+
+.auth-card .form-group input.has-error {
+  border-color: #FF6B6B;
+}
+
+.auth-card .form-group .field-error {
+  font-size: var(--text-small);
+  color: #FF6B6B;
+}
+
+.auth-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--gap-sm);
+  background: #C9A84C;
+  color: #0D0D1A;
+}
+
+.auth-submit:hover {
+  box-shadow: 0 0 20px rgba(201,168,76,0.5);
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: var(--text-small);
+  color: #8888AA;
+  margin-top: var(--gap-lg);
+}
+
+.auth-switch a {
+  color: #C9A84C;
+}
+
+.auth-success {
+  text-align: center;
+  color: #3DCA5A;
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  padding: var(--gap-xl);
+}
+
+.form-error-global {
+  background: rgba(255,107,107,0.1);
+  border: 1px solid rgba(255,107,107,0.4);
+  border-radius: var(--radius-sm);
+  color: #FF6B6B;
+  font-size: var(--text-small);
+  padding: 0.6rem var(--gap-md);
+}

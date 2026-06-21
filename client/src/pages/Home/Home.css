@@ -1,0 +1,124 @@
+.home-hero {
+  background: linear-gradient(to bottom, #12121F, #1C1C2E);
+  padding: var(--gap-xl) 0 var(--gap-lg);
+  border-bottom: 1px solid color-mix(in srgb, #C9A84C 20%, transparent);
+}
+
+.home-greeting {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--gap-sm);
+}
+
+.home-title {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 900;
+  color: #C9A84C;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 40px rgba(201,168,76,0.3);
+  margin-bottom: var(--gap-md);
+}
+
+.home-pitch {
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  margin-bottom: var(--gap-md);
+}
+
+.home-couplet {
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+/* ── Stats strip ── */
+.home-stats {
+  padding: var(--gap-lg) 0;
+  background: #12121F;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-stats__inner {
+  display: flex;
+  gap: var(--gap-lg);
+  flex-wrap: wrap;
+}
+
+.home-stat {
+  flex: 1;
+  min-width: 140px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-xs);
+}
+
+.home-stat__value {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  font-weight: 900;
+  color: #C9A84C;
+}
+
+.home-stat__label {
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── Lion nav cards ── */
+.home-cards {
+  padding: var(--gap-xl) 0;
+  flex: 1;
+}
+
+.home-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--gap-lg);
+}
+
+.home-lion-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-sm);
+  padding: var(--gap-lg);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  border-color: color-mix(in srgb, var(--card-accent) 20%, transparent);
+}
+
+.home-lion-card:hover {
+  border-color: var(--card-accent);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--card-accent) 25%, transparent);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.home-lion-card:focus-visible {
+  outline: 2px solid var(--card-accent);
+  outline-offset: 2px;
+}
+
+.home-lion-card__label {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: 700;
+  color: var(--card-accent);
+}
+
+.home-lion-card__tagline {
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}

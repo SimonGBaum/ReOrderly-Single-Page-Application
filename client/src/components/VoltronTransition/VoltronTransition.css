@@ -1,0 +1,37 @@
+.voltron-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  pointer-events: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.voltron-bar {
+  flex: 1;
+  height: 100vh;
+  background: var(--bar-color);
+  transform-origin: center;
+  transform: scaleY(0);
+}
+
+.voltron-overlay--assembling .voltron-bar {
+  animation: barAssemble 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: var(--bar-delay);
+}
+
+.voltron-overlay--assembled .voltron-bar {
+  transform: scaleY(1);
+}
+
+.voltron-overlay--disassembling .voltron-bar {
+  animation: barDisassemble 0.25s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: var(--bar-delay);
+}
+
+/* ── Reduced motion: no bars, just a quick opacity fade on page content ── */
+@media (prefers-reduced-motion: reduce) {
+  .voltron-overlay {
+    display: none;
+  }
+}
