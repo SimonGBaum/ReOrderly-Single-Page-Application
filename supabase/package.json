@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "supabase": "^2.107.0"
+  },
+  "dependencies": {
+    "@supabase/cli-linux-x64": "^2.107.0"
   }
 }
